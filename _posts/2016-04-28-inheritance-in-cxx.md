@@ -1,9 +1,9 @@
 ---
 layout: post
 title: Inheritance in C++
+category: c++ fundamentals
+tags: ["c++", "fundamentals", "black magic"]
 ---
-
-## Layouts, casts and thunks
 
 This article explains the issues of object layout in C++ and consequence of casting between types.
 

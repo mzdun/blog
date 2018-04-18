@@ -1,6 +1,8 @@
 ---
 layout: post
 title: Object lifetime and virtual calls
+category: c++ fundamentals
+tags: ["c++", "fundamentals", "black magic"]
 ---
 
 This article is an in-depth answer to "What happens, if I call a virtual method inside constructor?".
