@@ -1,3 +1,8 @@
+---
+layout: post
+title: Inheritance in C++
+---
+
 ## Layouts, casts and thunks
 
 This article explains the issues of object layout in C++ and consequence of casting between types.
@@ -106,7 +111,7 @@ B b: +-------- + class B       | memberY |     |     |
      +---------+               +---------+
 ```
 
-While `reinterpret_cast` is as unusable in this context as it is with &quot;normal&quot; multiple inheritance, `static_cast` starts to be even stranger than before. Notice, how `vttbl` for class `B` in object `b` has a different offset to `D` than in object `a`?
+While `reinterpret_cast` is as unusable in this context as it is with "normal" multiple inheritance, `static_cast` starts to be even stranger than before. Notice, how `vttbl` for class `B` in object `b` has a different offset to `D` than in object `a`?
 
 ## Casting from descendant to ancestor
 
@@ -126,7 +131,7 @@ Well, virtual methods. If you have a virtual method in `D`, then it's code doesn
 
 But the `vtbl` is not produced by the compiler until it sees any object created. At this point `vttbl` is created and all needed offsets are in place. Such `vtbl`contains pointers to all the overridden methods, but not direct ones.
 
-Since the code for the method is already created and that code make some assumptions about `this` pointer, the offset value between this descendant and &quot;movable&quot; class is taken by the compiler from newly created `vttbl` and a thunk is created. This thunk's responsibility is to adjust pointers between virtual ancestor and correct descendant.
+Since the code for the method is already created and that code make some assumptions about `this` pointer, the offset value between this descendant and "movable" class is taken by the compiler from newly created `vttbl` and a thunk is created. This thunk's responsibility is to adjust pointers between virtual ancestor and correct descendant.
 
 For instance, MSVC (which uses `ECX` to move `this`), when resolving a virtual method for `D::g`, as overridden by `B::g`, placed address 0x012D9D7C in one of the `vtbl`s, while true method lived under 0x012D2807. The latter method was, however, prepared with assumption where `this` should point to. It happens, that for this particular pair of types, the place `this` should point to is 28 (or 0x1C) bytes before beginning of virtual ancestor. So the address 0x012D9D7C became a house for this jump thunk:
 
@@ -136,10 +141,10 @@ B::g:
 012D9D7F  jmp         B::g (012D2807h)
 ```
 
-Those thunks are so common, the Microsoft's debugger has a support to tell you the type (or: purpose) of such methods. For instance, the debugger calls method under  0x012D2807 ``[thunk]:B::g`adjustor{28}'``, as in &quot;`B::g`, which is really an _adjustor thunk_ subtracting (or adding) 28 bytes&quot;. Why are they common, if the virtual inheritance is not?
+Those thunks are so common, the Microsoft's debugger has a support to tell you the type (or: purpose) of such methods. For instance, the debugger calls method under  0x012D2807 ``[thunk]:B::g`adjustor{28}'``, as in "`B::g`, which is really an _adjustor thunk_ subtracting (or adding) 28 bytes". Why are they common, if the virtual inheritance is not?
 
 The reason is, you need the thunk not only in virtual inheritance, you'll need it in any multiple inheritance. Each time a method is overridden for a class, whose sub-layout does not start at the beginning of current layout, an adjustor thunk _will_ be created to smooth things over, to help you not think too much how crazy multiple inheritance really is.
 
 So, if you would want to take one thing from all of this, I'd suggest this:
 
-> Never, ever use `reinterpret_cast`, unless absolutely necessary. Because when you do, well, <a href="http://www.catb.org/jargon/html/N/nasal-demons.html">nasal demons</a>.
+> Never, ever use `reinterpret_cast`, unless absolutely necessary. Because when you do, well, [nasal demons](http://www.catb.org/jargon/html/N/nasal-demons.html).

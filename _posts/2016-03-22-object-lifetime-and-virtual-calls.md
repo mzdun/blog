@@ -1,3 +1,8 @@
+---
+layout: post
+title: Object lifetime and virtual calls
+---
+
 This article is an in-depth answer to "What happens, if I call a virtual method inside constructor?".
 
 It explains, when a call to a method declared as virtual is actually virtual, defines what is object's lifetime, points where constructors and destructors fit into the object lifetime, how compiler and run time keep track of virtual methods available to object at any given moment of its existence and what are the consequences of all those things interacting.
