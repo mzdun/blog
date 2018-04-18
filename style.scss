@@ -7,6 +7,7 @@
 
 @import "reset";
 @import "variables";
+@import "tag";
 // Syntax highlighting @import is at the bottom of this file
 
 /**************/
@@ -252,6 +253,13 @@ nav {
 }
 
 .post {
+  h1.post-title {
+    margin-bottom: 0;
+  }
+  h1.post-title + p {
+    margin-top: 0;
+  }
+
   blockquote {
     margin: 1.8em .8em;
     border-left: 2px solid $gray;
@@ -269,6 +277,42 @@ nav {
     text-transform: uppercase;
     font-size: 15px;
   }
+
+  .neighbours {
+    font-size: smaller;
+    display: block;
+    width: auto;
+    overflow: hidden;
+
+    a {
+      display: block;
+      width: 50%;
+      margin: 1em 0;
+    }
+
+    .prev{
+      float: left;
+    }
+
+    .next{
+      float: right;
+      text-align: right;
+    }
+  }
+}
+
+.related {
+  .related-posts {
+    list-style: none;
+    padding-left: .5em;
+    h4 {
+      margin-bottom: 0;
+    }
+    h4, p {
+      margin-top: 0;
+    }
+  }
+  li small { font-size: 75%; color: $gray; }
 }
 
 .wrapper-footer {

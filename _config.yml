@@ -48,10 +48,15 @@ url: https://mzdun.github.io/blog/
 # and NOT your User repository (http://yourusername.github.io)
 # then add in the baseurl here, like this: "/repository-name"
 baseurl: "/blog"
+tag_page: '/tags/'
+category_page: '/categories/'
 
 #
 # !! You don't need to change any of the configuration flags below !!
 #
+
+paginate: 5
+paginate_path: '/blog/page:num'
 
 permalink: /:year/:month/:day/:slug/
 
@@ -76,6 +81,7 @@ sass:
 gems:
   - jekyll-sitemap # Create a sitemap using the official Jekyll sitemap gem
   - jekyll-feed # Create an Atom feed using the official Jekyll feed gem
+  - jekyll-paginate
 
 # Exclude these files from your production _site
 exclude:

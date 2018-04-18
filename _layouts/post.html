@@ -5,12 +5,27 @@ layout: default
 <article class="post">
   <h1>{{ page.title }}</h1>
 
-  <div class="entry">
-    {{ content }}
-  </div>
+  <div class="entry">{{ content }}</div>
 
   <div class="date">
-    Written on {{ page.date | date: "%B %e, %Y" }}
+    <p>Written on {{ page.date | date: "%B %e, %Y" }}.</p>
+{% if page.categories or page.tags %}    <p>
+{% if page.categories %}      Filed under:{% for category in page.categories %} <a href="{{ site.baseurl }}{{ site.category_page }}#{{ category }}" class="post-category">{{ category }}</a>{% endfor %}{% endif %}
+{% if page.tags %}      tags:{% for tag in page.tags %} <a href="{{ site.baseurl }}{{ site.tag_page }}#{{ tag }}" class="post-tag">{{ tag }}</a>{% endfor %}{% endif %}
+    </p>{% endif %}
+  </div>
+{% if site.related_posts %}<div class="related">
+  <h3>See also</h3>
+  <ul class="related-posts">
+    {% for post in site.related_posts limit:5 %}
+      <li><h4><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }} <small>{{ post.date | date_to_string }}</small></a></h4>{{post.excerpt}}</li>
+    {% endfor %}
+  </ul>
+</div>{% endif %}
+
+  <div class="neighbours">
+{% if page.previous.url %}    <a class="prev" href="{{ site.baseurl }}{{page.previous.url}}">&laquo; {{page.previous.title}}</a>{% endif %}
+{% if page.next.url %}    <a class="next" href="{{ site.baseurl }}{{page.next.url}}">{{page.next.title}} &raquo;</a>{% endif %}
   </div>
 
   {% include disqus.html %}
