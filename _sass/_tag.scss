@@ -1,11 +1,10 @@
-@mixin post-label($icon, $icon-font:$font-font-awesome) {
+@mixin post-label($icon, $color:$color-font-link, $icon-font:$font-family-icons) {
   display: inline-block;
-  background: rgba($blue, 0.15);
+  background: rgba($color, 0.15);
   padding: 0 .5rem;
   margin-right: .5rem;
   border-radius: 4px;
-  color: $blue;
-  font-family: $helveticaNeue;
+  color: $color;
   font-size: 90%;
   &:before {
     content: $icon;
@@ -14,8 +13,8 @@
   }
   &:hover {
     text-decoration: none;
-    background: $blue;
-    color: $white;
+    background: $color;
+    color: $color-font-inverse-base;
   }
   transition: all .1s ease-in-out;
 }
@@ -24,11 +23,11 @@
 }
 
 .post-category {
-  @include post-label("\f02d")
+  @include post-label("\f02d", $color-base-orange-500)
 }
 
 .post-comment {
-  @include post-label("\f0e6")
+  @include post-label("\f0e6", $color-base-green-500)
 }
 
 .tags-expo {
@@ -68,10 +67,9 @@
     .post-date {
       display: inline-block;
       font-size: 80%;
-      color: $gray;
+      color: $color-font-tertiary;
       margin: 0;
       padding: 0;
     }
-    font-family: $helveticaNeue;
   }
 }
