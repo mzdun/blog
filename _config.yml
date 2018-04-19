@@ -48,8 +48,8 @@ url: https://mzdun.github.io/blog/
 # and NOT your User repository (http://yourusername.github.io)
 # then add in the baseurl here, like this: "/repository-name"
 baseurl: ""
-tag_page: '/tags/'
-category_page: '/categories/'
+tag_page: '/blog/tags/'
+category_page: '/blog/categories/'
 
 #
 # !! You don't need to change any of the configuration flags below !!
@@ -58,7 +58,7 @@ category_page: '/categories/'
 paginate: 5
 paginate_path: '/blog/page:num'
 
-permalink: /:year/:month/:day/:slug/
+permalink: /blog/:year/:month/:day/:slug/
 
 # The release of Jekyll Now that you're using
 version: v1.2.0
