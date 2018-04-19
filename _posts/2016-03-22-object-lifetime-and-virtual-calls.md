@@ -92,22 +92,22 @@ obj.d();
 
 might result in this code on Intel processors:
 
-```
-MOV   ECX,dword ptr [obj]     // ECX contains this    
-MOV   EDX,dword ptr [ECX]     // EDX contains vtbl  
-MOV   EAX,dword ptr [EDX+0Ch] // move to 4th entry in vtbl
-CALL  EAX                     // method calls with this in ECX 
+```nasm
+MOV   ECX,dword ptr [obj]     ; ECX contains this    
+MOV   EDX,dword ptr [ECX]     ; EDX contains vtbl  
+MOV   EAX,dword ptr [EDX+0Ch] ; move to 4th entry in vtbl
+CALL  EAX                     ; method calls with this in ECX 
 ```
 
 or this code on ARMs:
 
-```
-ldr  r3, [obj]   // r3 contains this
-ldr  r3, [r3]    // ... now pointer to vtbl
-add  r3, r3, #12 // ... to it's 4th entry
-ldr  r3, [r3]    // ... to the function in this entry
-ldr  r0, [obj]   // r0 contains this for method call
-blx  r3          // method call
+```nasm
+ldr  r3, [obj]   ; r3 contains this
+ldr  r3, [r3]    ; ... now pointer to vtbl
+add  r3, r3, #12 ; ... to it's 4th entry
+ldr  r3, [r3]    ; ... to the function in this entry
+ldr  r0, [obj]   ; r0 contains this for method call
+blx  r3          ; method call
 ```
 
 > Virtual methods are gathered in a table containing list of addresses to all those methods for a given type. Address to this table is attached to every object of said type.
