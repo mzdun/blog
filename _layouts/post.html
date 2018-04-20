@@ -10,8 +10,8 @@ layout: default
   <div class="date">
     <p>Written on {{ page.date | date: "%B %e, %Y" }}.</p>
 {% if page.categories or page.tags %}    <p>
-{% if page.categories %}      Filed under:{% for category in page.categories %} <a href="{{ site.baseurl }}{{ site.category_page }}#{{ category }}" class="post-category">{{ category }}</a>{% endfor %}{% endif %}
-{% if page.tags %}      tags:{% for tag in page.tags %} <a href="{{ site.baseurl }}{{ site.tag_page }}#{{ tag }}" class="post-tag">{{ tag }}</a>{% endfor %}{% endif %}
+{% if page.categories %}      Filed under:{% for category in page.categories %} <a href="{{ site.baseurl }}{{ site.category_page }}#{{ category | slugify: 'pretty' }}" class="post-category">{{ category }}</a>{% endfor %}{% endif %}
+{% if page.tags %}      tags:{% for tag in page.tags %} <a href="{{ site.baseurl }}{{ site.tag_page }}#{{ tag | slugify: 'pretty' }}" class="post-tag">{{ tag }}</a>{% endfor %}{% endif %}
     </p>{% endif %}
   </div>
 {% if site.related_posts %}<div class="related">

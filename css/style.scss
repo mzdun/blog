@@ -313,6 +313,31 @@ nav {
   li small { font-size: 75%; color: $color-font-tertiary; }
 }
 
+.pagination {
+  color: $color-font-quaternary;
+  margin: 3em 0;
+  text-align: center;
+  .pagination-item {
+    display: inline-block;
+    width: 100%;
+    padding: 1em;
+    border: 1px solid $color-border-light;
+  }
+  @include larger {
+    .pagination-item {
+      width: 50%;
+    }
+    .pagination-item:first-child {
+      border-radius: 4px 0 0 4px;
+      float: left;
+    }
+
+    .pagination-item:last-child {
+      border-radius: 0 4px 4px 0;
+    }
+  }
+}
+
 .wrapper-footer {
   margin-top: 50px;
   border-top: 1px solid #ddd;
