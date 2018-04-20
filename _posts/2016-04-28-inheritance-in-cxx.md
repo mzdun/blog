@@ -1,11 +1,11 @@
 ---
 layout: post
 title: Inheritance in C++
-category: c++ fundamentals
+category: C++ Fundamentals
 tags: ["c++", "fundamentals", "black magic"]
 ---
 
-This article explains the issues of object layout in C++ and consequence of casting between types.
+This article explains the issues of object layout in C++ and consequence of casting between types.<!-- more --> I wanted to write text explaining thunks since late naughts, maybe 2010, but only after I was severely bitten by the `reinterpret_cast` in a large project I was part of in 2013, I knew, what this text will be about: `reinterpret_cast` and how it gets more dangerous with every layer of inheritance in C++. This is version from April 2016, which I wrote for some of my then-colleagues, after the _"Object lifetime and virtual calls"_.
 
 ## No inheritance
 
@@ -121,11 +121,11 @@ Casting from pointer to `B` to pointer to `D`, in it's essence, is still a point
 
 ## Casting from ancestor to descendant
 
-But how do you do `static_cast<A*>(pointer_to_D)`? Do you subtract 44 or 16? The answer is &ndash; you can't know, there is not enough information given, so both `static_cast` and C-style cast from virtual ancestor to descendant is not int the language. So how do you do that? One way is RTTI.
+But how do you do `static_cast<A*>(pointer_to_D)`? Do you subtract 44 or 16? The answer is &ndash; you can't know, there is not enough information given, so both `static_cast` and C-style cast from virtual ancestor to descendant is not int the language.
 
-Run-time Type Info, when turned on, attaches a small chunk of data to every object created in C++ program. It contains information on what exact type this object is and how it interacts with other types. This is used by `dynamic_cast`, a run time casting operator, to properly locate reverse offsets. Those chunk of data, however, put a tax on the program most programmers and product managers are unwilling to pay. What are other options?
+One way to do that is RTTI. Run-time Type Info, when turned on, attaches a small chunk of data to every object created in C++ program. It contains information on what exact type this object is and how it interacts with other types. This is used by `dynamic_cast`, a run time casting operator, to properly locate reverse offsets. Those chunk of data, however, put a tax on the program most programmers and product managers are unwilling to pay.
 
-Well, virtual methods. If you have a virtual method in `D`, then it's code doesn't care for `A`s, `B`s or `C`s of it's world, so no issue there. If you write your version for any of these descending classes, you write this as if `this` was of type `A*` or `B*`, just like with any other overriding code.
+What are other options? Well, virtual methods. If you have a virtual method in `D`, then it's code doesn't care for `A`s, `B`s or `C`s of it's world, so no issue there. If you write your version for any of these descending classes, you write this as if `this` was of type `A*` or `B*`, just like with any other overriding code.
 
 ## VTBL thunks
 
