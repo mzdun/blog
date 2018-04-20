@@ -22,20 +22,74 @@ html {
 body {
 	background: $color-background-base;
   font: 18px/1.4 $font-family-base;
-  color: $color-font-base;
+  color: $color-font-secondary;
 }
 
 .container {
   margin: 0 auto;
-  max-width: 740px;
+  max-width: 1024px;
   padding: 0 10px;
   width: 100%;
 }
 
+.wrapper-text {
+}
+
+.text :first-child {
+  margin-top: 0;
+}
+
+.sidebar {
+  border-top: solid 1px $color-border-light;
+  margin-top: 1em;
+  padding-top: 1em;
+
+  :first-child {
+    margin-top: 0;
+  }
+  :last-child {
+    margin-bottom: 0;
+  }
+
+  .listing {
+    list-style: none;
+  }
+  .categories a {
+    color: $color-base-orange-500;
+    &:hover {
+      color: $color-base-orange-900;
+    }
+  }
+}
+
+.cleared { clear: both; }
+
+@media screen and (min-width: 1024px) {
+  .wrapper-text {
+    margin-right: 250px;
+  }
+
+  .text {
+    float: left;
+    width: 100%;
+    padding-right: 1em;
+    border-right: solid 1px $color-border-light;
+  }
+
+  .sidebar {
+    float: right;
+    width: 250px;
+    margin-right: -250px;
+    padding-left: 1em;
+    border: none;
+    margin-top: 0;
+    padding-top: 0;
+  }
+}
+
 h1, h2, h3, h4, h5, h6 {
   font-family: $font-family-header;
-  color: $color-font-tertiary;
-  font-weight: bold;
+  color: $color-font-base;
 
   line-height: 1.7;
   margin: 1em 0 15px;

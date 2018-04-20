@@ -42,8 +42,22 @@
       </div>
     </div>
 
-    <div id="main" role="main" class="container">
-      {{ content }}
+    <div class="wrapper-container">
+      <div class="container">
+        <div class="wrapper-text">
+          <div id="main" role="main" class="text">
+            {{ content }}
+          </div>
+
+          <div class="sidebar">
+            <h3>Categories:</h3>
+            <ul class="listing categories">
+{% for tag in site.categories %}            <li><a href="{{ site.baseurl }}{{ site.category_page }}#{{ tag[0] | slugify: 'pretty' }}" class="post-category-icon">{{ tag[0] }}</a></li>{% endfor %}
+            </ul>
+          </div>
+          <div class="cleared"></div>
+        </div>
+      </div>
     </div>
 
     <div class="wrapper-footer">

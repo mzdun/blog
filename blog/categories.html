@@ -1,12 +1,9 @@
 ---
 layout: page
-title: Categories
+title: Filed under
 ---
 
 <div class="tags-expo">
-  <div class="tags-expo-list">
-{% for tag in site.categories %}    <a href="#{{ tag[0] | slugify: 'pretty' }}" class="post-category">{{ tag[0] }}</a>{% endfor %}
-  </div>
   <div class="tags-expo-section">
 {% for tag in site.categories %}    <h2 id="{{ tag[0] | slugify: 'pretty' }}">{{ tag[0] }}</h2>
     <ul class="tags-expo-posts">

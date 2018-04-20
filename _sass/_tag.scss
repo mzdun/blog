@@ -1,3 +1,10 @@
+@mixin icon-class($icon, $icon-font:$font-family-icons) {
+  &:before {
+    content: $icon;
+    font-family: $icon-font;
+    padding-right: .5em;
+  }
+}
 @mixin post-label($icon, $color:$color-font-link, $icon-font:$font-family-icons) {
   display: inline-block;
   background: rgba($color, 0.15);
@@ -6,11 +13,7 @@
   border-radius: 4px;
   color: $color;
   font-size: 90%;
-  &:before {
-    content: $icon;
-    font-family: $icon-font;
-    padding-right: .5em;
-  }
+  @include icon-class($icon, $icon-font);
   &:hover {
     text-decoration: none;
     background: $color;
@@ -28,6 +31,18 @@
 
 .post-comment {
   @include post-label("\f0e6", $color-base-green-500)
+}
+
+.post-tag-icon {
+  @include icon-class("\f02c")
+}
+
+.post-category-icon {
+  @include icon-class("\f02d")
+}
+
+.post-comment-icon {
+  @include icon-class("\f0e6")
 }
 
 .tags-expo {
